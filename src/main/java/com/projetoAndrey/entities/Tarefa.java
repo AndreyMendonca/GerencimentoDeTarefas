@@ -7,17 +7,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="tb_tarefas")
-public class Tarefas implements Serializable{
+public class Tarefa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@ManyToOne
+	private Painel painel;
 	private String name;
 	private String descricao;
 	private LocalDate dataCadastro;
@@ -25,14 +28,15 @@ public class Tarefas implements Serializable{
 	private String status;
 	private Boolean concluida;
 	
-	public Tarefas() {};
+	public Tarefa() {};
 
-	public Tarefas(Long id, String name, String descricao, LocalDate dataTermino, String status) {
+	public Tarefa(Long id, String name, String descricao, LocalDate dataTermino, String status) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.descricao = descricao;
 		this.dataTermino = dataTermino;
+		this.status = status;
 		this.concluida = false;
 		setDataCadastro();
 	}
@@ -92,9 +96,4 @@ public class Tarefas implements Serializable{
 	public void setConcluida(Boolean concluida) {
 		this.concluida = concluida;
 	}
-	
-	
-	
-	
-
 }
